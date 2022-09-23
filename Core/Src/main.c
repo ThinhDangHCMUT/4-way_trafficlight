@@ -281,14 +281,75 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  int counter = 0;
+  int led_counter = 0;
+  int led_counter_1 = 0;
+
+  int counter_red = 5;
+  int counter_yellow = 2;
+  int counter_green = 3;
+
+  int counter_red_1 = 5;
+  int counter_yellow_1 = 2;
+  int counter_green_1 = 3;
   while (1)
   {
-	  /* EXERCISE 4 */
-	  if(counter >= 10) counter = 0;
-	  SevenSegment_A(counter++);
-	  HAL_Delay(1000);
+	  /* EXERCISE 5 */
+      //W-E way
+	  if(led_counter == 10) led_counter = 0;
+	  if(led_counter < 5 ){
+	  //red_on
+		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
+		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
+		  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, SET);
+		  counter_yellow = 2;
+	      SevenSegment_A(counter_red--);
 
+	  }
+	  //green_on
+	  if(led_counter >= 5 && led_counter < 8){
+		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
+		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
+		  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, RESET);
+		  counter_red = 5;
+		  SevenSegment_A(counter_green--);
+	  }
+	  //yellow_on
+	  if(led_counter >= 8 && led_counter < 10){
+		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
+		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, RESET);
+		  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, SET);
+		  counter_green = 3;
+		  SevenSegment_A(counter_yellow--);
+	  }
+	  //N-S way
+	  if(led_counter_1 == 10) led_counter_1 = 0;
+	  if(led_counter_1 < 3){
+	       //green_on
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, SET);
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, SET);
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, RESET);
+		  counter_red_1 = 5;
+		  SevenSegment_B(counter_green_1--);
+	  }
+	  if(led_counter_1 >= 3 && led_counter_1 < 5){
+	  		 //yellow_on
+	  		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, SET);
+	  		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, RESET);
+	  		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, SET);
+	  		counter_green_1 = 3;
+	  		SevenSegment_B(counter_yellow_1--);
+	  }
+	  if(led_counter_1 >= 5 && led_counter_1 < 10){
+		  	//red_on
+		    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, RESET);
+		  	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, SET);
+		  	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10,SET);
+		  	counter_yellow_1 = 2;
+		    SevenSegment_B(counter_red_1--);
+		  }
+	  HAL_Delay(1000);
+	  led_counter++;
+	  led_counter_1++;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
