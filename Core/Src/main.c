@@ -281,33 +281,13 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  int led_counter = 0;
+  int counter = 0;
   while (1)
   {
-	  /* EXERCISE 2 */
-	  if(led_counter == 10) led_counter = 0;
-	 	  //red_on
-	 	  if(led_counter < 5 ){
-	 		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
-	 		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
-	 		  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, SET);
-
-	 	  }
-	 	  //green_on
-	 	  if(led_counter >= 5 && led_counter < 8){
-	 		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
-	 		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
-	 		  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, RESET);
-	 	  }
-	 	  //yellow_on
-	 	  if(led_counter >= 8 && led_counter < 10){
-	 		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
-	 		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, RESET);
-	 		  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, SET);
-	 	  }
-
-	 	  HAL_Delay(1000);
-	 	  led_counter++;
+	  /* EXERCISE 4 */
+	  if(counter >= 10) counter = 0;
+	  SevenSegment_A(counter++);
+	  HAL_Delay(1000);
 
     /* USER CODE END WHILE */
 
