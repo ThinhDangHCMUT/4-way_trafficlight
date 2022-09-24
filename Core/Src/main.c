@@ -281,50 +281,60 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
+  //SUM COUNTER OF 3 LED SIGNAL
   int led_counter = 0;
   int led_counter_1 = 0;
 
+  //COUNTER OF EACH LED SIGNAL W-E WAY
   int counter_red = 5;
   int counter_yellow = 2;
   int counter_green = 3;
-
+  //COUNTER OF EACH LED SIGNAL N-S WAY
   int counter_red_1 = 5;
   int counter_yellow_1 = 2;
   int counter_green_1 = 3;
   while (1)
   {
 	  /* EXERCISE 5 */
-      //W-E way
-	  if(led_counter == 10) led_counter = 0;
+      //W-E way code
+	  if(led_counter == 10) led_counter = 0; //if(yellow led counter is
 	  if(led_counter < 5 ){
-	  //red_on
+		  //turn on the red led within 5s
 		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
+		  //turn off the yellow led
 		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
+		  //turn off the green led
 		  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, SET);
-		  counter_yellow = 2;
-	      SevenSegment_A(counter_red--);
+		  counter_yellow = 2; // after each while loop, set yellow counter is initial value for the next counter
+	      SevenSegment_A(counter_red--); //count down red led
 
 	  }
-	  //green_on
 	  if(led_counter >= 5 && led_counter < 8){
+		  //turn off the red led
 		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
+		  //turn off the yellow led
 		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
+		  //turn on the green led within 3s
 		  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, RESET);
-		  counter_red = 5;
-		  SevenSegment_A(counter_green--);
+		  counter_red = 5;  // after each while loop, set red counter is initial value for the next counter
+		  SevenSegment_A(counter_green--); //count down green led
 	  }
-	  //yellow_on
 	  if(led_counter >= 8 && led_counter < 10){
+		  //turn off the red led
 		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
+		  //turn on the yellow led within 3s
 		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, RESET);
+		  //turn off the green led
 		  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, SET);
-		  counter_green = 3;
-		  SevenSegment_A(counter_yellow--);
+		  counter_green = 3;   // after each while loop, set green counter is initial value for the next counter
+		  SevenSegment_A(counter_yellow--);  //count down yellow led
 	  }
-	  //N-S way
+	  //N-S way is similar to W-E way
+	  /*LED assign: RED - GPIO_PIN_10,
+	   * YELLOW - GPIO_PIN_9, GREEN - GPIO_PIN_8
+	   */
 	  if(led_counter_1 == 10) led_counter_1 = 0;
 	  if(led_counter_1 < 3){
-	       //green_on
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, SET);
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, SET);
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, RESET);
